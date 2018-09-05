@@ -1,36 +1,66 @@
-<div class="jumbotron">
-  <h2><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h2>
-  <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
+<head>
+  <style>
+  #gameBoard {
+	position:relative;
+	margin:0 auto 2em auto;
+	width:500px;
+	height:500px;
+}
+
+#gameBoard div {
+	position:absolute;
+	-webkit-box-sizing: border-box; /* Safari 3.0 - 5.0, Chrome 1 - 9, Android 2.1 - 3.x */
+	-moz-box-sizing: border-box;    /* Firefox 1 - 28 */
+	box-sizing: border-box;         /* Safari 5.1+, Chrome 10+, Firefox 29+, Opera 7+, IE 8+, Android 4.0+, iOS any */
+	background: #f6f8f9; /* Old browsers */
+	border: 1px solid #ddd;
+	width:50px;
+	height:50px;
+}
+
+#gameBoard div:hover {
+	background: red!important;
+}
+</style>
+</head>
+<body>
+
+<h1> Game Board </h1>
+<div id="gameBoard">
 </div>
 
-<div class="row marketing">
-  <div class="col-lg-6">
-    <h4>Resources</h4>
-    <ul>
-      <li>
-        <a href="http://phoenixframework.org/docs/overview">Guides</a>
-      </li>
-      <li>
-        <a href="https://hexdocs.pm/phoenix">Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-    </ul>
-  </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</body>
+<script>
+var rows = 100;
+var cols = 100;
+var squareSize = 50;
 
-  <div class="col-lg-6">
-    <h4>Help</h4>
-    <ul>
-      <li>
-        <a href="http://groups.google.com/group/phoenix-talk">Mailing list</a>
-      </li>
-      <li>
-        <a href="http://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">@elixirphoenix</a>
-      </li>
-    </ul>
-  </div>
-</div>
+// get the container element
+var gameBoardContainer = document.getElementById("gameBoard");
+
+// make the grid columns and rows
+for (i = 0; i < cols; i++) {
+	for (j = 0; j < rows; j++) {
+
+		// create a new div HTML element for each grid square and make it the right size
+		var square = document.createElement("div");
+
+		gameBoardContainer.appendChild(square);
+
+    // give each div element a unique id based on its row and column, like "s00"
+		square.id = 's' + j + i;
+
+		// set each grid square's coordinates: multiples of the current row or column number
+		var topPosition = j * squareSize;
+		var leftPosition = i * squareSize;
+
+		// use CSS absolute positioning to place each grid square on the page
+		square.style.top = topPosition + 'px';
+		square.style.left = leftPosition + 'px';
+    //square.style.borderStyle.top="inset";
+    //square.style.borderWidth="1px";
+	}
+}
+
+</script>
