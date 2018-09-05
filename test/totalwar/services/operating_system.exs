@@ -47,5 +47,22 @@ defmodule Totalwar.Services.OperatingSystemTest do
     assert OperatingSystem.setup_board == {:ok, {100,100}}
   end
 
+  test "move is checked for a hit & registered at location" do
+    hit_locations = [%{x: 2, y: 2},
+                      %{x: 3, y: 2},
+                      %{x: 4, y: 2}
+                    ]
+    assert OperatingSystem.check_move_is_hit(%{"x" => 2, "y" => 2}, hit_locations) == {:ok, %{x: 2, y: 2, successful: true}}
+  end
+
+  test "move is checked for a hit, fails & registered at location as false" do
+    hit_locations = [%{x: 2, y: 2},
+                      %{x: 3, y: 2},
+                      %{x: 4, y: 2}
+                    ]
+    assert OperatingSystem.check_move_is_hit(%{"x" => 1, "y" => 2}, hit_locations) == {:ok, %{x: 1, y: 2, successful: false}}
+  end
+
+
 
 end

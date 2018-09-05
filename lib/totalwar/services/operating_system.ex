@@ -5,6 +5,28 @@ defmodule Totalwar.Services.OperatingSystem do
     :ok
   end
 
+  def check_move_is_hit(%{"x" => x_loc, "y" => y_loc}, hit_locations) do
+    move = %{x: x_loc, y: y_loc}
+    with true <- Enum.any?(hit_locations, fn(positions) -> positions == move end) do
+      check_hit_intersection(move, hit_locations)
+    else
+      false -> register_hit(move, false)
+    end
+  end
+
+  defp register_hit(hit_location, valid_hit?) do
+    case valid_hit? do
+      true ->
+        {:ok, %{x: hit_location.x, y: hit_location.y, successful: true}}
+      false ->
+        {:ok, %{x: hit_location.x, y: hit_location.y, successful: false}}
+    end
+  end
+
+  def check_hit_intersection(move, hit_locations) do
+    hit_location = hit_locations |> Enum.reject(fn(positions) -> positions !== move end) |> List.first
+    register_hit(hit_location, true)
+  end
 
   def check_valid_move(%{"x" => pos_x, "y" => pos_y}, %{"x_lim" => x_size, "y_lim" => y_size}) do
     x_valid? = check_bounds(pos_x, x_size)
