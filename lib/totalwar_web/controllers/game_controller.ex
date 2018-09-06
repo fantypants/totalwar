@@ -15,7 +15,6 @@ defmodule TotalwarWeb.GameController do
   end
 
   def create(conn, %{"game" => game_params}) do
-    IO.inspect game_params["count"]
     changeset = Game.changeset(%Game{}, game_params)
 
     case Repo.insert(changeset) do
