@@ -18,6 +18,17 @@ The Project Aim is to have a free open source game that is playable for communit
 The way the turns will work:
 -Everyone picks a team and then the summation of the turns are calculated, the highest turn will be chosen for that team
 
+Game A.I ->
+I am creating a game ai that you can play against and it can set it's own placement for the ships.
+
+TO DO LIST:
+ * Make Database Relations `Complete`
+ * Make Ship Structs `Complete`
+ * Make AI Placement for Horizontal `Complete`
+ * Make AI Placement for Vertical
+ * Make Target Checker and Valid Move Checker `Complete`
+ * Make Turn AI System
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
